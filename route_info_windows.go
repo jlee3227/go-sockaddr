@@ -28,16 +28,18 @@ func NewRouteInfo() (routeInfo, error) {
 // GetDefaultInterfaceName returns the interface name attached to the default
 // route on the default interface.
 func (ri routeInfo) GetDefaultInterfaceName() (string, error) {
-	if hasPowershell() {
-		ifNameOut, err := exec.Command(cmds["defaultInterface"][0], cmds["defaultInterface"][1:]...).Output()
-		if err != nil {
-			return "", err
-		}
-		ifName := strings.TrimSpace(string(ifNameOut[:]))
-		return ifName, nil
-	} else {
+	if !hasPowershell() {
+		// No powershell, fallback to legacy method
 		return ri.GetDefaultInterfaceNameLegacy()
 	}
+
+	ifNameOut, err := exec.Command(cmds["defaultInterface"][0], cmds["defaultInterface"][1:]...).Output()
+	if err != nil {
+		return "", err
+	}
+
+	ifName := strings.TrimSpace(string(ifNameOut[:]))
+	return ifName, nil
 }
 
 // GetDefaultInterfaceNameLegacy provides legacy behavior for GetDefaultInterfaceName
