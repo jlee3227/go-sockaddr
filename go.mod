@@ -1,6 +1,6 @@
 module github.com/hashicorp/go-sockaddr
 
-go 1.19.0
+go 1.19
 
 require (
 	github.com/hashicorp/errwrap v1.1.0
