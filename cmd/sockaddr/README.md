@@ -4,7 +4,7 @@
 from the command line.
 
 ```text
-$ go get -u github.com/hashicorp/go-sockaddr/cmd/sockaddr
+$ go install github.com/hashicorp/go-sockaddr/cmd/sockaddr@latest
 ```
 
 ```text
